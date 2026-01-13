@@ -1,7 +1,10 @@
 package org.example;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class BankAccountTest {
 
@@ -9,6 +12,7 @@ public class BankAccountTest {
     public void testConstructorInitializesAccountWithNameAndBalance() {
         BankAccount account = new BankAccount("John Doe", 1000.0);
         assertEquals("John Doe", account.getAccountHolderName());
+        //For floating‑point numbers (like double), JUnit doesn’t compare with strict equality, because of rounding errors.
         assertEquals(1000.0, account.getBalance(), 0.001);
         assertNotNull(account.getAccountId());
     }
@@ -92,5 +96,13 @@ public class BankAccountTest {
         BankAccount account = new BankAccount("Test", 100.0);
         account.withdraw(0.0);
         assertEquals(100.0, account.getBalance(), 0.001);
+    }
+
+    @Test
+    public void testWithdrawNegativeAmountThrowsException() {
+        BankAccount account = new BankAccount("Test", 100.0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            account.deposit(-50.0);
+        });
     }
 }

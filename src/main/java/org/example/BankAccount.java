@@ -25,6 +25,9 @@ public class BankAccount {
      */
     public void deposit(double amount)
     {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Deposit amount cannot be negative");
+        }
         this.balance += amount;
     }
 
