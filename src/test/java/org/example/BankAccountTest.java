@@ -99,10 +99,18 @@ public class BankAccountTest {
     }
 
     @Test
-    public void testWithdrawNegativeAmountThrowsException() {
+    public void testDepositNegativeAmountThrowsException() {
         BankAccount account = new BankAccount("Test", 100.0);
         assertThrows(IllegalArgumentException.class, () -> {
             account.deposit(-50.0);
+        });
+    }
+
+    @Test
+    public void testWithdrawNegativeAmountThrowsException() {
+        BankAccount account = new BankAccount("Test", 100.0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            account.withdraw(-50.0);
         });
     }
 }
