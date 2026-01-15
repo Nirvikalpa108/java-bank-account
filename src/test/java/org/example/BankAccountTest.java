@@ -113,4 +113,11 @@ public class BankAccountTest {
             account.withdraw(-50.0);
         });
     }
+
+    public void testWithdrawInsufficientFundsThrowsException() {
+        BankAccount account = new BankAccount("Test", 100.0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            account.withdraw(200.0);
+        });
+    }
 }
